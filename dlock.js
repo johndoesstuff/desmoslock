@@ -1,7 +1,6 @@
 //desmos lock by @JohnDoesStuff
 if (window.location.href.includes("desmos.com/calculator")) {
-	var Calc = Calc || false;
-	if (Calc !== false) {
+	if (typeof Calc != "undefined") { //thanks u/SlimRunner
 		var DLock = {};
 		DLock.getLock = function() { //gets the array of all lockable variables
 			var expressions = Calc.getState().expressions.list;
@@ -37,7 +36,7 @@ if (window.location.href.includes("desmos.com/calculator")) {
 			}
 		}
 		DLock.handler = function(e) {
-			if (e.altKey && e.code == "KeyL") {
+			if (e.altKey && ((e.code == "KeyL") || (e.key == "l"))) {
 				DLock.set();
 			}
 		}
