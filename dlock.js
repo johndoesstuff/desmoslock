@@ -1,7 +1,7 @@
 //desmos lock by @JohnDoesStuff
 if (window.location.href.includes("desmos.com/calculator")) {
 	var Calc = Calc || false;
-	if (Calc) {
+	if (Calc !== false) {
 		var DLock = {};
 		DLock.getLock = function() { //gets the array of all lockable variables
 			var expressions = Calc.getState().expressions.list;
@@ -24,7 +24,7 @@ if (window.location.href.includes("desmos.com/calculator")) {
 			var expr = DLock.getExpression(selected);
 			var currentLatex = expr.latex;
 			for (var i = 0; i < vars.length; i++) {
-				currentLatex = currentLatex.split(vars[i]).join(values[i]);
+				currentLatex = currentLatex.split(vars[i]).join("\\left(" + values[i] + "\\right)");
 			}
 			expr.latex = currentLatex;
 			expr.id = "dlock" + (new Date()).getTime();
